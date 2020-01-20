@@ -54,18 +54,19 @@ services:
         protocol: tcp
 
   db:
-    image: postgres:12-alpine
+    image: mysql:8.0
     environment:
-      - POSTGRES_DB=api
-      - POSTGRES_PASSWORD=!ChangeMe!
-      - POSTGRES_USER=api-platform
+      - MYSQL_DATABASE=api
+      - MYSQL_PASSWORD=!ChangeMe!
+      - MYSQL_USER=api-platform
+      - MYSQL_ROOT_PASSWORD=!Iam_G_ROOT!
     volumes:
-      - db-data:/var/lib/postgresql/data:rw
+      #- db-data:/var/lib/mysql:rw
       # you may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./api/docker/db/data:/var/lib/postgresql/data:rw
+      - ./api/var/db-data:/var/lib/mysql:rw
     ports:
-      - target: 5432
-        published: 5432
+      - target: 3306
+        published: 3306
         protocol: tcp
 
   mercure:
