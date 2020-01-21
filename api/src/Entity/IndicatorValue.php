@@ -76,6 +76,17 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface {
     private $sourceUrl;
 
     /**
+     * @var Indicator
+     * @ApiProperty(
+     *     description="The related indicator"
+     * )
+     * @Groups({"indicator_value:output", "indicator_value:input"})
+     * @ORM\ManyToOne(targetEntity="Indicator", inversedBy="values")
+     * @Assert\NotBlank
+     */
+    private $indicator;
+
+    /**
      * @return string
      */
     public function getSourceUrl(): string {
@@ -88,6 +99,22 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface {
      */
     public function setSourceUrl(string $sourceUrl): self {
         $this->sourceUrl = $sourceUrl;
+        return $this;
+    }
+
+    /**
+     * @return Indicator
+     */
+    public function getIndicator(): ?Indicator {
+        return $this->indicator;
+    }
+
+    /**
+     * @param Indicator $indicator
+     * @return self
+     */
+    public function setIndicator(Indicator $indicator): self {
+        $this->indicator = $indicator;
         return $this;
     }
 }
