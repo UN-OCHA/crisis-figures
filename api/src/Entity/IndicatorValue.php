@@ -17,6 +17,7 @@ use App\Entity\Traits\Accessor;
  * The IndicatorValue entity.
  *
  * @ApiResource(
+ *     shortName="values",
  *     normalizationContext={
  *         "groups"={"indicator_value:output"}
  *     },
