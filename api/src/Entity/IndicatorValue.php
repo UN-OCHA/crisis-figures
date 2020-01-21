@@ -18,10 +18,10 @@ use App\Entity\Traits\Accessor;
  *
  * @ApiResource(
  *     normalizationContext={
- *         "groups"={"read"}
+ *         "groups"={"indicator_value:output"}
  *     },
  *     denormalizationContext={
- *         "groups"={"write"}
+ *         "groups"={"indicator_value:input"}
  *     }
  * )
  * @ORM\Entity
@@ -37,7 +37,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface {
     /**
      * @var int The entity Id
      *
-     * @Groups({"read"})
+     * @Groups({"indicator_value:output"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -49,7 +49,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface {
      * @ApiProperty(
      *     description="The date on which the value is recorder."
      * )
-     * @Groups({"read", "write"})
+     * @Groups({"indicator_value:output", "indicator_value:input"})
      * @ORM\Column(type="datetime")
      * @Assert\DateTime
      */
@@ -60,8 +60,8 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface {
      * @ApiProperty(
      *     description="A numeric value of an indicator."
      * )
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="decimal")
+     * @Groups({"indicator_value:output", "indicator_value:input"})
+     * @ORM\Column(type="float")
      */
     private $value;
 
@@ -70,7 +70,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface {
      * @ApiProperty(
      *     description="The source URL of the value."
      * )
-     * @Groups({"read", "write"})
+     * @Groups({"indicator_value:output", "indicator_value:input"})
      * @ORM\Column(type="string")
      */
     private $sourceUrl;

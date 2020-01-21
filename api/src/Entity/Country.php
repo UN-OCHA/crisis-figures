@@ -15,10 +15,10 @@ use App\Entity\Traits\Accessor;
  *
  * @ApiResource(
  *     normalizationContext={
- *         "groups"={"read"}
+ *         "groups"={"country:output"}
  *     },
  *     denormalizationContext={
- *         "groups"={"write"}
+ *         "groups"={"country:input"}
  *     }
  * )
  * @ORM\Entity
@@ -40,7 +40,7 @@ class Country {
     /**
      * @var string
      * @ApiProperty
-     * @Groups({"read", "write"})
+     * @Groups({"country:output", "country:input"})
      * @ORM\Column
      * @Assert\NotBlank
      */
@@ -51,7 +51,7 @@ class Country {
      * @ApiProperty(
      *     description="The officially assigned ISO 3166-1 alpha-3 country code.",
      * )
-     * @Groups({"read", "write"})
+     * @Groups({"country:output", "country:input"})
      * @ORM\Column
      * @Assert\NotBlank
      */
@@ -62,7 +62,7 @@ class Country {
      * @ApiProperty(
      *     description="A list of Indicator entities associated with the country."
      * )
-     * @Groups({"read", "write"})
+     * @Groups({"country:output"})
      * @ORM\OneToMany(targetEntity="Indicator", mappedBy="country")
      */
     private $indicators;

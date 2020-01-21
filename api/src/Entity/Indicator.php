@@ -15,10 +15,10 @@ use App\Entity\Traits\Accessor;
  *
  * @ApiResource(
  *     normalizationContext={
- *         "groups"={"read"}
+ *         "groups"={"indicator:output"}
  *     },
  *     denormalizationContext={
- *         "groups"={"write"}
+ *         "groups"={"indicator:input"}
  *     }
  * )
  * @ORM\Entity
@@ -42,7 +42,7 @@ class Indicator {
      * @ApiProperty(
      *     description="The indicator's name."
      * )
-     * @Groups({"read", "write"})
+     * @Groups({"indicator:output", "indicator:input"})
      * @ORM\Column
      * @Assert\NotBlank
      */
@@ -53,7 +53,7 @@ class Indicator {
      * @ApiProperty(
      *     description="The source organization."
      * )
-     * @Groups({"read", "write"})
+     * @Groups({"indicator:output", "indicator:input"})
      * @ORM\Column
      * @Assert\NotBlank
      */
@@ -64,9 +64,8 @@ class Indicator {
      * @ApiProperty(
      *     description="One or more values of the indicator."
      * )
-     * @Groups({"read", "write"})
+     * @Groups({"indicator:output", "indicator:input"})
      * @ORM\OneToMany(targetEntity="IndicatorValue", mappedBy="indicator")
-     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      */
     private $values;
 
@@ -75,9 +74,8 @@ class Indicator {
      * @ApiProperty(
      *     description="The target country."
      * )
-     * @Groups({"read", "write"})
+     * @Groups({"indicator:output", "indicator:input"})
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="indicators")
-     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      * @Assert\NotBlank
      */
     private $country;
@@ -108,7 +106,7 @@ class Indicator {
     /**
      * @return array
      */
-    public function getValues(): array {
+    public function getValues() {
         return $this->values;
     }
 
