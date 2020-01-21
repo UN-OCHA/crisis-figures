@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * The IndicatorValue entity.
  *
  * @ApiResource(
- *     shortName="values",
+ *     shortName="Value",
  *     normalizationContext={
  *         "groups"={"indicator_value:output"}
  *     },
