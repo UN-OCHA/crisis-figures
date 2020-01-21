@@ -4,11 +4,10 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Traits\Accessor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-
-use App\Entity\Traits\Accessor;
 
 /**
  * The Indicator entity.
@@ -22,10 +21,9 @@ use App\Entity\Traits\Accessor;
  *     }
  * )
  * @ORM\Entity
- * @package App\Entity
  */
-class Indicator {
-
+class Indicator
+{
     use Accessor\Id;
     use Accessor\Name;
 
@@ -83,55 +81,50 @@ class Indicator {
     /**
      * Indicator constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->values = [];
     }
 
-    /**
-     * @return string
-     */
-    public function getOrganization(): string {
+    public function getOrganization(): string
+    {
         return $this->organization;
     }
 
-    /**
-     * @param string $organization
-     * @return self
-     */
-    public function setOrganization(string $organization): self {
+    public function setOrganization(string $organization): self
+    {
         $this->organization = $organization;
+
         return $this;
     }
 
     /**
      * @return array
      */
-    public function getValues() {
+    public function getValues()
+    {
         return $this->values;
     }
 
-    /**
-     * @param array $values
-     * @return self
-     */
-    public function setValues(array $values): self {
+    public function setValues(array $values): self
+    {
         $this->values = $values;
+
         return $this;
     }
 
     /**
      * @return Country
      */
-    public function getCountry(): ?Country {
+    public function getCountry(): ?Country
+    {
         return $this->country;
     }
 
-    /**
-     * @param Country $country
-     * @return self
-     */
-    public function setCountry(Country $country): self {
+    public function setCountry(Country $country): self
+    {
         $this->country = $country;
+
         return $this;
     }
 }

@@ -4,11 +4,10 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Traits\Accessor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-
-use App\Entity\Traits\Accessor;
 
 /**
  * The Country entity.
@@ -23,8 +22,8 @@ use App\Entity\Traits\Accessor;
  * )
  * @ORM\Entity
  */
-class Country {
-
+class Country
+{
     use Accessor\Id;
     use Accessor\Name;
 
@@ -70,39 +69,35 @@ class Country {
     /**
      * Country constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->indicators = [];
     }
 
-    /**
-     * @return string
-     */
-    public function getIso3(): string {
+    public function getIso3(): string
+    {
         return $this->iso3;
     }
 
-    /**
-     * @param string $iso3
-     * @return self
-     */
-    public function setIso3(string $iso3): self {
+    public function setIso3(string $iso3): self
+    {
         $this->iso3 = $iso3;
+
         return $this;
     }
 
     /**
      * @return array
      */
-    public function getIndicators() {
+    public function getIndicators()
+    {
         return $this->indicators;
     }
 
-    /**
-     * @param array $indicators
-     * @return self
-     */
-    public function setIndicators(array $indicators): self {
+    public function setIndicators(array $indicators): self
+    {
         $this->indicators = $indicators;
+
         return $this;
     }
 }

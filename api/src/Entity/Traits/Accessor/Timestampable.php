@@ -5,8 +5,8 @@ namespace App\Entity\Traits\Accessor;
 use DateTimeInterface;
 use Knp\DoctrineBehaviors\Model\Timestampable\TimestampableMethodsTrait;
 
-trait Timestampable {
-
+trait Timestampable
+{
     use TimestampableMethodsTrait;
 
     /**

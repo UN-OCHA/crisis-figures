@@ -4,14 +4,13 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Traits\Accessor;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity as BehaviorEntity;
 use Knp\DoctrineBehaviors\Model as BehaviorModel;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-
-use App\Entity\Traits\Accessor;
 
 /**
  * The IndicatorValue entity.
@@ -26,10 +25,9 @@ use App\Entity\Traits\Accessor;
  *     }
  * )
  * @ORM\Entity
- * @package App\Entity
  */
-class IndicatorValue implements BehaviorEntity\TimestampableInterface {
-
+class IndicatorValue implements BehaviorEntity\TimestampableInterface
+{
     use Accessor\Id;
     use Accessor\Date;
     use Accessor\Value;
@@ -87,35 +85,30 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface {
      */
     private $indicator;
 
-    /**
-     * @return string
-     */
-    public function getSourceUrl(): string {
+    public function getSourceUrl(): string
+    {
         return $this->sourceUrl;
     }
 
-    /**
-     * @param string $sourceUrl
-     * @return self
-     */
-    public function setSourceUrl(string $sourceUrl): self {
+    public function setSourceUrl(string $sourceUrl): self
+    {
         $this->sourceUrl = $sourceUrl;
+
         return $this;
     }
 
     /**
      * @return Indicator
      */
-    public function getIndicator(): ?Indicator {
+    public function getIndicator(): ?Indicator
+    {
         return $this->indicator;
     }
 
-    /**
-     * @param Indicator $indicator
-     * @return self
-     */
-    public function setIndicator(Indicator $indicator): self {
+    public function setIndicator(Indicator $indicator): self
+    {
         $this->indicator = $indicator;
+
         return $this;
     }
 }
