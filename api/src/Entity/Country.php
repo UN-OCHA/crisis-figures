@@ -54,7 +54,7 @@ class Country
      * @ORM\Column
      * @Assert\NotBlank
      */
-    private $iso3;
+    private $code;
 
     /**
      * @var array
@@ -74,14 +74,14 @@ class Country
         $this->indicators = [];
     }
 
-    public function getIso3(): string
+    public function getCode(): string
     {
-        return $this->iso3;
+        return $this->code;
     }
 
-    public function setIso3(string $iso3): self
+    public function setCode(string $code): self
     {
-        $this->iso3 = $iso3;
+        $this->code = $code;
 
         return $this;
     }
