@@ -102,7 +102,7 @@ class Term
     /**
      * @var Vocabulary
      * @ApiProperty(
-     *     description="Related terms."
+     *     description="Related vocabulary."
      * )
      * @Groups({"term:output", "term:input"})
      * @ORM\ManyToOne(targetEntity="Vocabulary", inversedBy="terms")

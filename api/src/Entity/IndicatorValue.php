@@ -43,7 +43,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
     /**
      * @var
      * @ApiProperty(
-     *     description="The date on which the value is recorder."
+     *     description="The date on which the value is recorded."
      * )
      * @Groups({"indicator_value:output", "indicator_value:input"})
      * @ORM\Column(type="datetime")
