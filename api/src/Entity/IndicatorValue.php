@@ -5,7 +5,6 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Traits\Accessor;
-use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity as BehaviorEntity;
 use Knp\DoctrineBehaviors\Model as BehaviorModel;
@@ -30,12 +29,10 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
 {
     use Accessor\Id;
     use Accessor\Date;
-    use Accessor\Value;
     use BehaviorModel\Timestampable\TimestampableTrait;
 
     /**
      * @var int The entity Id
-     *
      * @Groups({"indicator_value:output"})
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -44,12 +41,13 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
     private $id;
 
     /**
-     * @var DateTimeInterface
+     * @var
      * @ApiProperty(
      *     description="The date on which the value is recorder."
      * )
      * @Groups({"indicator_value:output", "indicator_value:input"})
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank
      * @Assert\DateTime
      */
     private $date;
@@ -70,7 +68,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      *     description="The source URL of the value."
      * )
      * @Groups({"indicator_value:output", "indicator_value:input"})
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     private $sourceUrl;
 
@@ -81,13 +79,29 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      * )
      * @Groups({"indicator_value:output", "indicator_value:input"})
      * @ORM\ManyToOne(targetEntity="Indicator", inversedBy="values")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      * @Assert\NotBlank
      */
     private $indicator;
 
+    /**
+     * @return string
+     */
     public function getSourceUrl(): string
     {
         return $this->sourceUrl;
+    }
+
+    public function getValue(): float
+    {
+        return $this->value;
+    }
+
+    public function setValue(float $value): self
+    {
+        $this->value = $value;
+
+        return $this;
     }
 
     public function setSourceUrl(string $sourceUrl): self

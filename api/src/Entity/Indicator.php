@@ -26,6 +26,7 @@ class Indicator
 {
     use Accessor\Id;
     use Accessor\Name;
+    use Accessor\Terms;
 
     /**
      * @var int The entity Id
@@ -41,7 +42,7 @@ class Indicator
      *     description="The indicator's name."
      * )
      * @Groups({"indicator:output", "indicator:input"})
-     * @ORM\Column
+     * @ORM\Column(type="text")
      * @Assert\NotBlank
      */
     private $name;
@@ -53,14 +54,13 @@ class Indicator
      * )
      * @Groups({"indicator:output", "indicator:input"})
      * @ORM\Column
-     * @Assert\NotBlank
      */
     private $organization;
 
     /**
      * @var array
      * @ApiProperty(
-     *     description="One or more values of the indicator."
+     *     description="A list of indicator values."
      * )
      * @Groups({"indicator:output", "indicator:input"})
      * @ORM\OneToMany(targetEntity="IndicatorValue", mappedBy="indicator")
@@ -79,13 +79,28 @@ class Indicator
     private $country;
 
     /**
+     * @var array
+     * @ApiProperty(
+     *     description="Related terms."
+     * )
+     * @Groups({"indicator:output", "indicator:input"})
+     * @ORM\ManyToMany(targetEntity="Term", inversedBy="indicators")
+     * @ORM\JoinTable(name="indicators_terms")
+     */
+    private $terms;
+
+    /**
      * Indicator constructor.
      */
     public function __construct()
     {
         $this->values = [];
+        $this->terms = [];
     }
 
+    /**
+     * @return string
+     */
     public function getOrganization(): string
     {
         return $this->organization;
@@ -116,7 +131,7 @@ class Indicator
     /**
      * @return Country
      */
-    public function getCountry(): ?Country
+    public function getCountry()
     {
         return $this->country;
     }

@@ -29,7 +29,9 @@ class Country
 
     /**
      * @var int The entity Id
-     * @ApiProperty
+     * @ApiProperty(
+     *     identifier=false,
+     * )
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -38,23 +40,26 @@ class Country
 
     /**
      * @var string
-     * @ApiProperty
+     * @ApiProperty(
+     *     identifier=true,
+     *     description="The officially assigned ISO 3166-1 alpha-3 country code.",
+     * )
      * @Groups({"country:output", "country:input"})
-     * @ORM\Column
+     * @ORM\Column(unique=true)
      * @Assert\NotBlank
      */
-    private $name;
+    private $code;
 
     /**
      * @var string
      * @ApiProperty(
-     *     description="The officially assigned ISO 3166-1 alpha-3 country code.",
+     *     description="The country name."
      * )
      * @Groups({"country:output", "country:input"})
      * @ORM\Column
      * @Assert\NotBlank
      */
-    private $code;
+    private $name;
 
     /**
      * @var array
