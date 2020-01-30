@@ -1,0 +1,34 @@
+App\Entity\Country:
+    
+    country_afghanistan:
+        code: afg
+        name: Afghanistan
+    
+    country_australia:
+        code: aus
+        name: Australia
+
+    country_benin:
+        code: ben
+        name: Benin
+    
+    country_congo:
+        code: cog
+        name: Congo    
+    
+    country_djibouti:
+        code: dji
+        name: Djibouti
+
+    country_el_salvador:
+        code: slv
+        name: El Salvador
+
+    country_french_guiana:
+        code: guf
+        name: French Guiana
+
+    country_guatemala:
+        code: gtm
+        name: Guatemala
+

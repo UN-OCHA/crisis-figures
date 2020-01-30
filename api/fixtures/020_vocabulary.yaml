@@ -1,0 +1,13 @@
+App\Entity\Vocabulary:
+    
+    vocabulary_theme:
+        name: theme
+        label: Theme
+    
+    vocabulary_base_indicator:
+        name: base_indicator
+        label: Base Indicator
+
+    vocabulary_affected_population:
+        name: affected_population
+        label: Affected Population

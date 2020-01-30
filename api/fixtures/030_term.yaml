@@ -1,0 +1,47 @@
+App\Entity\Term:
+    
+    term_agriculture:
+        name: agriculture
+        label: Agriculture
+        vocabulary: '@vocabulary_theme'
+
+    term_climate_change:
+        name: climate_change
+        label: Climate Change
+        vocabulary: '@vocabulary_theme'
+
+    term_natural_disasters:
+        name: natural_disasters
+        label: Natural Disasters
+        vocabulary: '@vocabulary_affected_population'
+        parent: '@term_climate_change'
+    
+    term_idf:
+        name: idf
+        label: IDF
+        vocabulary: '@vocabulary_base_indicator'
+        
+    term_people_in_need:
+        name: people_in_need
+        label: People in Need
+        vocabulary: '@vocabulary_base_indicator'
+
+    term_children_in_need:
+        name: children_in_need
+        label: Children in Need
+        vocabulary: '@vocabulary_base_indicator'
+    
+    term_marine_life:
+        name: marine_life
+        label: Marine Life
+        vocabulary: '@vocabulary_theme'
+
+    term_oil_spills:
+        name: oil_spills
+        label: Oil Spills
+        vocabulary: '@vocabulary_theme'
+
+    term_healthcare:
+        name: healthcare
+        label: Healthcaree
+        vocabulary: '@vocabulary_theme'
