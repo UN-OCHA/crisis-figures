@@ -1,0 +1,87 @@
+country_afghanistan:	
+	code: afg	
+	name: 'Afghanistan'
+country_bangladesh:	
+	code: bgd	
+	name: 'Bangladesh'
+country_burkina_faso:	
+	code: bfa	
+	name: 'Burkina Faso'
+country_burundi:	
+	code: bdi	
+	name: 'Burundi'
+country_cameroon:	
+	code: cmr	
+	name: 'Cameroon'
+country_central_african_republic:	
+	code: caf	
+	name: 'Central African Republic'
+country_chad:	
+	code: tcd	
+	name: 'Chad'
+country_colombia:	
+	code: col	
+	name: 'Colombia'
+country_democratic_republic_congo:	
+	code: cod	
+	name: 'Democratic Republic of the Congo'
+country_ethiopia:	
+	code: eth	
+	name: 'Ethiopia'
+country_haiti:	
+	code: hti	
+	name: 'Haiti'
+country_iraq:	
+	code: irq	
+	name: 'Iraq'
+country_kenya:	
+	code: ken	
+	name: 'Kenya'
+country_lebanon:	
+	code: lbn	
+	name: 'Lebanon'
+country_libya:	
+	code: lby	
+	name: 'Libya'
+country_mali:	
+	code: mli	
+	name: 'Mali'
+country_mozambique:	
+	code: moz	
+	name: 'Mozambique'
+country_myanmar:	
+	code: mmr	
+	name: 'Myanmar'
+country_niger:	
+	code: ner	
+	name: 'Niger'
+country_nigeria:	
+	code: nga	
+	name: 'Nigeria'
+country_occupied_palestinian_territory:	
+	code: pse	
+	name: 'occupied Palestinian territory'
+country_somalia:	
+	code: som	
+	name: 'Somalia'
+country_south_sudan:	
+	code: ssd	
+	name: 'South Sudan'
+country_sudan:	
+	code: sdn	
+	name: 'Sudan'
+country_syria:	
+	code: syr	
+	name: 'Syria'
+country_ukraine:	
+	code: ukr	
+	name: 'Ukraine'
+country_venezuela:	
+	code: ven	
+	name: 'Venezuela'
+country_yemen:	
+	code: yem	
+	name: 'Yemen'
+country_zimbabwe:	
+	code: zwe	
+	name: 'Zimbabwe'
