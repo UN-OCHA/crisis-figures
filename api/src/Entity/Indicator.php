@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Entity\Traits\Accessor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -84,6 +87,7 @@ class Indicator
      * @ApiProperty(
      *     description="Related terms."
      * )
+     * @ApiFilter(SearchFilter::class, properties={"terms.name": "exact"})
      * @Groups({"indicator:output", "indicator:input"})
      * @ORM\ManyToMany(targetEntity="Term", inversedBy="indicators")
      * @ORM\JoinTable(name="indicators_terms")

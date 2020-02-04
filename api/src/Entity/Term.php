@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 use App\Entity\Traits\Accessor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,10 +18,20 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiResource(
  *     normalizationContext={
- *         "groups"={"term:output"}
+ *         "groups"={"term:output"},
+ *         "enable_max_depth"=true,
+ *         "force_eager"=false
  *     },
  *     denormalizationContext={
  *         "groups"={"term:input"}
+ *     }
+ * )
+ * @ApiFilter(
+ *     GroupFilter::class,
+ *     arguments={
+ *         "parameterName"="with",
+ *         "overrideDefaultGroups"=false,
+ *         "whitelist"={"vocabulary", "parent"}
  *     }
  * )
  * @ORM\Entity
@@ -32,7 +46,7 @@ class Term
      * @var int The entity Id
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @Groups({"term:output"})
+     * @Groups({"terms", "term:output"})
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -42,7 +56,7 @@ class Term
      * @ApiProperty(
      *     description="A short name for the term to be used for filtering, etc...",
      * )
-     * @Groups({"vocabulary:output", "vocabulary:input"})
+     * @Groups({"terms", "term:output", "term:input"})
      * @ORM\Column(type="string")
      * @Assert\NotBlank
      */
@@ -53,7 +67,7 @@ class Term
      * @ApiProperty(
      *     description="A label that describes the term."
      * )
-     * @Groups({"term:output", "term:input"})
+     * @Groups({"terms", "term:output", "term:input"})
      * @ORM\Column(type="text")
      * @Assert\NotBlank
      */
@@ -74,7 +88,6 @@ class Term
      * @ApiProperty(
      *     description="One or more values of the indicator."
      * )
-     * @Groups({"term:output", "term:input"})
      * @ORM\ManyToMany(targetEntity="Indicator", mappedBy="terms")
      */
     private $indicators;
@@ -84,7 +97,8 @@ class Term
      * @ApiProperty(
      *     description="Related terms."
      * )
-     * @Groups({"term:output", "term:input"})
+     * @Groups({"parent"})
+     * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity="Term", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
@@ -95,7 +109,7 @@ class Term
      * @ApiProperty(
      *     description="Child terms."
      * )
-     * @Groups({"term:output", "term:input"})
+     * @Groups({"term:children"})
      * @ORM\OneToMany(targetEntity="Term", mappedBy="parent")
      */
     private $children;
@@ -105,7 +119,9 @@ class Term
      * @ApiProperty(
      *     description="Related vocabulary."
      * )
-     * @Groups({"term:output", "term:input"})
+     * @ApiFilter(SearchFilter::class, properties={"vocabulary.name": "exact"})
+     * @Groups({"vocabulary"})
+     * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity="Vocabulary", inversedBy="terms")
      */
     private $vocabulary;

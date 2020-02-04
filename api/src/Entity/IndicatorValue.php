@@ -46,7 +46,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      * @ApiProperty(
      *     description="The date on which the value is recorded."
      * )
-     * @Groups({"indicator_value:output", "indicator_value:input"})
+     * @Groups({"indicator:output", "indicator_value:output", "indicator_value:input"})
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank
      * @Assert\DateTime
@@ -58,7 +58,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      * @ApiProperty(
      *     description="A numeric value of an indicator."
      * )
-     * @Groups({"indicator_value:output", "indicator_value:input"})
+     * @Groups({"indicator:output", "indicator_value:output", "indicator_value:input"})
      * @ORM\Column(type="float")
      */
     private $value;
@@ -68,7 +68,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      * @ApiProperty(
      *     description="The source URL of the value."
      * )
-     * @Groups({"indicator_value:output", "indicator_value:input"})
+     * @Groups({"indicator:output", "indicator_value:output", "indicator_value:input"})
      * @ORM\Column(type="text")
      */
     private $sourceUrl;
