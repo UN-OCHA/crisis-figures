@@ -121,7 +121,7 @@ class Term
     /**
      * @return string
      */
-    public function getValue(): string
+    public function getValue(): ?string
     {
         return $this->value;
     }
@@ -146,7 +146,7 @@ class Term
         return $this;
     }
 
-    public function getParent(): Term
+    public function getParent(): ?Term
     {
         return $this->parent;
     }
@@ -171,7 +171,7 @@ class Term
         return $this;
     }
 
-    public function getVocabulary(): Vocabulary
+    public function getVocabulary(): ?Vocabulary
     {
         return $this->vocabulary;
     }
