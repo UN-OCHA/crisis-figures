@@ -32,6 +32,7 @@ class Indicator
      * @var int The entity Id
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @Groups({"indicator:output"})
      * @ORM\Column(type="integer")
      */
     private $id;

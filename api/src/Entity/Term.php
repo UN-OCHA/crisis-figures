@@ -32,6 +32,7 @@ class Term
      * @var int The entity Id
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @Groups({"term:output"})
      * @ORM\Column(type="integer")
      */
     private $id;

@@ -34,6 +34,7 @@ class Country
      * )
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @Groups({"country:output"})
      * @ORM\Column(type="integer")
      */
     private $id;

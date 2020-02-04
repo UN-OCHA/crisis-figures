@@ -34,6 +34,7 @@ class Vocabulary
      * @ApiProperty
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @Groups("vocabulary:output"})
      * @ORM\Column(type="integer")
      */
     private $id;

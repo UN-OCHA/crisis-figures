@@ -36,6 +36,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      * @Groups({"indicator_value:output"})
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @Groups({"indicator:output", "indicator_value:output"})
      * @ORM\Column(type="integer")
      */
     private $id;
