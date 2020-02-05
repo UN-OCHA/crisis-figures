@@ -57,7 +57,7 @@ class Indicator
      *     description="The source organization."
      * )
      * @Groups({"indicator:output", "indicator:input"})
-     * @ORM\Column
+     * @ORM\Column(type="string", nullable=true)
      */
     private $organization;
 
@@ -106,7 +106,7 @@ class Indicator
     /**
      * @return string
      */
-    public function getOrganization(): string
+    public function getOrganization(): ?string
     {
         return $this->organization;
     }
