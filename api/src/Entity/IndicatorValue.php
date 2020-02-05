@@ -47,9 +47,9 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      *     description="The date on which the value is recorded."
      * )
      * @Groups({"indicator:output", "indicator_value:output", "indicator_value:input"})
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      * @Assert\NotBlank
-     * @Assert\DateTime
+     * @Assert\Date
      */
     private $date;
 
