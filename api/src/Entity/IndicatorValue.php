@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Entity\Traits\Accessor;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity as BehaviorEntity;
@@ -78,6 +80,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      * @ApiProperty(
      *     description="The related indicator"
      * )
+     * @ApiFilter(SearchFilter::class, properties={"indicator": "exact"})
      * @Groups({"indicator_value:output", "indicator_value:input"})
      * @ORM\ManyToOne(targetEntity="Indicator", inversedBy="values")
      * @ORM\JoinColumn(onDelete="CASCADE")
