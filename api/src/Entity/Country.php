@@ -67,7 +67,6 @@ class Country
      * @ApiProperty(
      *     description="A list of Indicator entities associated with the country."
      * )
-     * @Groups({"country:output"})
      * @ORM\OneToMany(targetEntity="Indicator", mappedBy="country")
      */
     private $indicators;
