@@ -1,5 +1,5 @@
 App\Entity\Term:
-    
+
     term_education:
         name: education
         label: 'Education'
@@ -29,6 +29,11 @@ App\Entity\Term:
         label: 'No theme'
         vocabulary: '@vocabulary_theme'
     
+    term_no_base_indicator:
+        name: no_base_indicator
+        label: 'No Base Indicator'
+        vocabulary: '@vocabulary_base_indicator'
+        parent: '@term_no_theme'
     term_acutely_malnourished_children:
         name: acutely_malnourished_children
         label: 'Acutely Malnourished Children'
@@ -243,18 +248,18 @@ App\Entity\Term:
         label: 'Health Facilities - Killed'
         vocabulary: '@vocabulary_base_indicator'
         parent: '@term_health'
-    term_no_base_indicator:
-        name: no_base_indicator
-        label: 'No Base Indicator'
+    term_no_base_indicator_education:
+        name: no_base_indicator_education
+        label: 'Education - No Base Indicator'
         vocabulary: '@vocabulary_base_indicator'
-    #    parent: '@term_education'
-    #term_no_base_indicator:
-    #    name: no_base_indicator
-    #    label: 'No Base Indicator'
-    #    vocabulary: '@vocabulary_base_indicator'
-    #    parent: '@term_food'
-    #term_no_base_indicator:
-    #    name: no_base_indicator
-    #    label: 'No Base Indicator'
-    #    vocabulary: '@vocabulary_base_indicator'
-    #    parent: '@term_health'
+        parent: '@term_education'
+    term_no_base_indicator_food:
+        name: no_base_indicator_food
+        label: 'Food - No Base Indicator'
+        vocabulary: '@vocabulary_base_indicator'
+        parent: '@term_food'
+    term_no_base_indicator_health:
+        name: no_base_indicator_health
+        label: 'Health - No Base Indicator'
+        vocabulary: '@vocabulary_base_indicator'
+        parent: '@term_health'

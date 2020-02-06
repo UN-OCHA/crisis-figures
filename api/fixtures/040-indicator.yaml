@@ -1,5 +1,5 @@
 App\Entity\Indicator:
-
+    
     indicator_acutely_malnourished_children_country_south_sudan:
         name: 'Acutely Malnourished Children'
         organization: 'IPC'
@@ -852,7 +852,7 @@ App\Entity\Indicator:
         organization: 'Education Cluster'
         country: '@country_mali'
         terms:
-            - '@term_no_base_indicator'
+            - '@term_no_base_indicator_education'
             - '@term_education'
     indicator_confirmed_cholera_cases_since_mar_2019_country_cameroon:
         name: 'Confirmed Cholera Cases (since Mar 2019)'
@@ -2126,7 +2126,7 @@ App\Entity\Indicator:
         organization: 'FAO'
         country: '@country_nigeria'
         terms:
-            - '@term_no_base_indicator'
+            - '@term_no_base_indicator_food'
             - '@term_food'
     indicator_out-of-camp_refugees_in_far_north_country_cameroon:
         name: 'Out-of-camp Refugees in Far North'
