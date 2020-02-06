@@ -5,8 +5,8 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Annotation\ApiSubresource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 use App\Entity\Traits\Accessor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -21,6 +21,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     },
  *     denormalizationContext={
  *         "groups"={"indicator:input"}
+ *     }
+ * )
+ * @ApiFilter(
+ *     GroupFilter::class,
+ *     arguments={
+ *         "parameterName"="with",
+ *         "overrideDefaultGroups"=false,
+ *         "whitelist"={"terms"}
  *     }
  * )
  * @ORM\Entity
@@ -66,7 +74,6 @@ class Indicator
      * @ApiProperty(
      *     description="A list of indicator values."
      * )
-     * @Groups({"indicator:output", "indicator:input"})
      * @ORM\OneToMany(targetEntity="IndicatorValue", mappedBy="indicator")
      */
     private $values;
@@ -88,7 +95,7 @@ class Indicator
      *     description="Related terms."
      * )
      * @ApiFilter(SearchFilter::class, properties={"terms.name": "exact"})
-     * @Groups({"indicator:output", "indicator:input"})
+     * @Groups({"terms"})
      * @ORM\ManyToMany(targetEntity="Term", inversedBy="indicators")
      * @ORM\JoinTable(name="indicators_terms")
      */
