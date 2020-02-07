@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     arguments={
  *         "parameterName"="with",
  *         "overrideDefaultGroups"=false,
- *         "whitelist"={"terms"}
+ *         "whitelist"={"terms", "values"}
  *     }
  * )
  * @ORM\Entity
@@ -74,6 +74,7 @@ class Indicator
      * @ApiProperty(
      *     description="A list of indicator values."
      * )
+     * @Groups({"values"})
      * @ORM\OneToMany(targetEntity="IndicatorValue", mappedBy="indicator")
      */
     private $values;
