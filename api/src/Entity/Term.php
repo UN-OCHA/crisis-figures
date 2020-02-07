@@ -97,6 +97,7 @@ class Term
      * @ApiProperty(
      *     description="Related terms."
      * )
+     * @ApiFilter(SearchFilter::class, properties={"parent.name": "exact"})
      * @Groups({"parent"})
      * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity="Term", inversedBy="children")
