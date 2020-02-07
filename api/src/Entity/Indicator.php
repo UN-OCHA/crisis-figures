@@ -84,6 +84,7 @@ class Indicator
      * @ApiProperty(
      *     description="The target country."
      * )
+     * @ApiFilter(SearchFilter::class, properties={"country": "exact", "country.code": "exact"})
      * @Groups({"indicators", "indicator:output", "indicator:input"})
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="indicators")
      * @Assert\NotBlank
