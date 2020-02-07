@@ -88,6 +88,7 @@ class Term
      * @ApiProperty(
      *     description="One or more values of the indicator."
      * )
+     * @ApiFilter(SearchFilter::class, properties={"indicators": "exact"})
      * @ORM\ManyToMany(targetEntity="Indicator", mappedBy="terms")
      */
     private $indicators;
