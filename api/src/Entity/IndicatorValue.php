@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 use App\Entity\Traits\Accessor;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity as BehaviorEntity;
@@ -23,6 +24,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     },
  *     denormalizationContext={
  *         "groups"={"indicator_value:input"}
+ *     }
+ * )
+ * @ApiFilter(
+ *     GroupFilter::class,
+ *     arguments={
+ *         "parameterName"="with",
+ *         "overrideDefaultGroups"=false,
+ *         "whitelist"={"indicators"}
  *     }
  * )
  * @ORM\Entity
@@ -81,7 +90,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      *     description="The related indicator"
      * )
      * @ApiFilter(SearchFilter::class, properties={"indicator": "exact"})
-     * @Groups({"indicator_value:output", "indicator_value:input"})
+     * @Groups({"indicators"})
      * @ORM\ManyToOne(targetEntity="Indicator", inversedBy="values")
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Assert\NotBlank

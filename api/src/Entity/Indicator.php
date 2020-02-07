@@ -43,7 +43,7 @@ class Indicator
      * @var int The entity Id
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @Groups({"indicator:output"})
+     * @Groups({"indicators", "indicator:output"})
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -53,7 +53,7 @@ class Indicator
      * @ApiProperty(
      *     description="The indicator's name."
      * )
-     * @Groups({"indicator:output", "indicator:input"})
+     * @Groups({"indicators", "indicator:output", "indicator:input"})
      * @ORM\Column(type="text")
      * @Assert\NotBlank
      */
@@ -64,7 +64,7 @@ class Indicator
      * @ApiProperty(
      *     description="The source organization."
      * )
-     * @Groups({"indicator:output", "indicator:input"})
+     * @Groups({"indicators", "indicator:output", "indicator:input"})
      * @ORM\Column(type="string", nullable=true)
      */
     private $organization;
@@ -83,7 +83,7 @@ class Indicator
      * @ApiProperty(
      *     description="The target country."
      * )
-     * @Groups({"indicator:output", "indicator:input"})
+     * @Groups({"indicators", "indicator:output", "indicator:input"})
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="indicators")
      * @Assert\NotBlank
      */
