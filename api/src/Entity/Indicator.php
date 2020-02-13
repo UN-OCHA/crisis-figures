@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     arguments={
  *         "parameterName"="with",
  *         "overrideDefaultGroups"=false,
- *         "whitelist"={"terms", "values"}
+ *         "whitelist"={"terms", "values", "vocabulary"}
  *     }
  * )
  * @ORM\Entity

@@ -47,7 +47,7 @@ class Vocabulary
      * @ApiProperty
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @Groups({"vocabulary:output"})
+     * @Groups({"vocabulary", "vocabulary:output"})
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -57,7 +57,7 @@ class Vocabulary
      * @ApiProperty(
      *     description="A short name for the vocabulary to be used for filtering, etc...",
      * )
-     * @Groups({"term:output", "vocabulary:output", "vocabulary:input"})
+     * @Groups({"vocabulary", "vocabulary:output", "vocabulary:input"})
      * @ORM\Column(type="string")
      * @Assert\NotBlank
      */
@@ -68,7 +68,7 @@ class Vocabulary
      * @ApiProperty(
      *     description="A label that describes the vocabulary."
      * )
-     * @Groups({"term:output", "vocabulary:output", "vocabulary:input"})
+     * @Groups({"vocabulary", "vocabulary:output", "vocabulary:input"})
      * @ORM\Column(type="text")
      * @Assert\NotBlank
      */
@@ -79,7 +79,6 @@ class Vocabulary
      * @ApiProperty(
      *     description="A list of terms associated with the vocabulary."
      * )
-     * @Groups({"terms"})
      * @MaxDepth(1)
      * @ORM\OneToMany(targetEntity="Term", mappedBy="vocabulary")
      */
