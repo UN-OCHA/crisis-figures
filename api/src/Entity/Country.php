@@ -89,7 +89,7 @@ class Country
 
     public function setCode(string $code): self
     {
-        $this->code = $code;
+        $this->code = strtolower($code);
 
         return $this;
     }
