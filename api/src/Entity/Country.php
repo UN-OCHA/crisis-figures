@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Entity\Traits\Accessor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -56,6 +58,7 @@ class Country
      * @ApiProperty(
      *     description="The country name."
      * )
+     * @ApiFilter(SearchFilter::class, properties={"name": "start"})
      * @Groups({"country", "country:output", "country:input"})
      * @ORM\Column
      * @Assert\NotBlank
