@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     arguments={
  *         "parameterName"="with",
  *         "overrideDefaultGroups"=false,
- *         "whitelist"={"terms", "values", "vocabulary"}
+ *         "whitelist"={"terms", "values", "vocabulary", "country"}
  *     }
  * )
  * @ORM\Entity
@@ -85,7 +85,7 @@ class Indicator
      *     description="The target country."
      * )
      * @ApiFilter(SearchFilter::class, properties={"country": "exact", "country.code": "exact"})
-     * @Groups({"indicators", "indicator:output", "indicator:input"})
+     * @Groups({"country", "indicators", "indicator:output", "indicator:input"})
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="indicators")
      * @Assert\NotBlank
      */

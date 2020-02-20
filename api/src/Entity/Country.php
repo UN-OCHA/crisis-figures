@@ -34,7 +34,7 @@ class Country
      * )
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @Groups({"country:output"})
+     * @Groups({"country", "country:output"})
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -45,7 +45,7 @@ class Country
      *     identifier=true,
      *     description="The officially assigned ISO 3166-1 alpha-3 country code.",
      * )
-     * @Groups({"country:output", "country:input"})
+     * @Groups({"country", "country:output", "country:input"})
      * @ORM\Column(unique=true)
      * @Assert\NotBlank
      */
@@ -56,7 +56,7 @@ class Country
      * @ApiProperty(
      *     description="The country name."
      * )
-     * @Groups({"country:output", "country:input"})
+     * @Groups({"country", "country:output", "country:input"})
      * @ORM\Column
      * @Assert\NotBlank
      */
