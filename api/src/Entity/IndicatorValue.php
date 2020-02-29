@@ -89,8 +89,8 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      * @ApiProperty(
      *     description="The related indicator"
      * )
-     * @ApiFilter(SearchFilter::class, properties={"indicator": "exact"})
-     * @Groups({"indicators"})
+     * @ApiFilter(SearchFilter::class, properties={"indicator": "exact", "indicator.id": "exact"})
+     * @Groups({"indicators", "indicator_value:input"})
      * @ORM\ManyToOne(targetEntity="Indicator", inversedBy="values")
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Assert\NotBlank
