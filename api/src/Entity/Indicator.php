@@ -53,6 +53,7 @@ class Indicator
      * @ApiProperty(
      *     description="The indicator's name."
      * )
+     * @ApiFilter(SearchFilter::class, properties={"name": "start"})
      * @Groups({"indicators", "indicator:output", "indicator:input"})
      * @ORM\Column(type="text")
      * @Assert\NotBlank
