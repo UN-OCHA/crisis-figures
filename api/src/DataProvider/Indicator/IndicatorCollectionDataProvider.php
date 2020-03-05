@@ -1,7 +1,8 @@
 <?php
 
-namespace App\DataProvider;
+namespace App\DataProvider\Indicator;
 
+use ApiPlatform\Core\Api\OperationType;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryResultCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGenerator;
 use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
@@ -21,13 +22,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * This data provider implements the Indicators Presets requirement through
  * which API clients can request Indicator collections to be filtered and
  * formatted according to predefined criteria.
- *
- * @package App\DataProvider
  */
-class IndicatorDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
+class IndicatorCollectionDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
-    public const PRESET_HISTORY = 'history';
-    public const PRESET_LATEST = 'latest';
+    use IndicatorPresetCommons;
 
     private iterable $collectionExtensions;
     private ManagerRegistry $managerRegistry;
@@ -35,7 +33,7 @@ class IndicatorDataProvider implements ContextAwareCollectionDataProviderInterfa
     private Request $currentRequest;
 
     /**
-     * IndicatorDataProvider constructor.
+     * IndicatorCollectionDataProvider constructor.
      *
      * @param \Doctrine\Common\Persistence\ManagerRegistry $managerRegistry
      * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
@@ -71,6 +69,7 @@ class IndicatorDataProvider implements ContextAwareCollectionDataProviderInterfa
         $repository = $manager->getRepository($resourceClass);
         $queryBuilder = $repository->createQueryBuilder('o');
         $queryNameGenerator = new QueryNameGenerator();
+        $preset = $this->getPresetFromContext(OperationType::COLLECTION, $context);
 
         // Delegate query building to API Platform's built-in extensions so this
         // data provider can support filtering, pagination, etc...
@@ -86,7 +85,6 @@ class IndicatorDataProvider implements ContextAwareCollectionDataProviderInterfa
                 // at this stage.
 
                 // Retrieve the `preset` parameter from the request.
-                $preset = $this->currentRequest->query->get('preset');
                 $this->applyPresetMutations($queryBuilder, $preset);
             }
         }
@@ -100,62 +98,5 @@ class IndicatorDataProvider implements ContextAwareCollectionDataProviderInterfa
         }
 
         return $result;
-    }
-
-    /**
-     * Modify the query to aggregate indicator values according to the
-     * provided preset.
-     *
-     * @param QueryBuilder $queryBuilder
-     * @param string|null $preset
-     */
-    protected function applyPresetMutations(QueryBuilder $queryBuilder, ?string $preset)
-    {
-        /* @var Join[] $joinsGroup */
-
-        // Currently only a `latest` preset requires mutating the query since
-        // the `history` preset fetches all IndicatorValues, which is the
-        // default behavior.
-        if ($preset !== self::PRESET_LATEST) {
-            return;
-        }
-
-        $joins = $queryBuilder->getDQLPart('join');
-
-        // Find a Join that targets the `values` table
-        foreach ($joins as $joinSetAlias => $joinsGroup) {
-            foreach ($joinsGroup as $jIndex => $join) {
-                if ($join->getJoin() === "{$joinSetAlias}.values") {
-                    $this->aggregateByLatestValue($queryBuilder, $join);
-                    break 2;
-                }
-            }
-        }
-    }
-
-    /**
-     * Perform the actual injection and/or modification of DQL parts in order to
-     * group the results based on the target aggregation field.
-     *
-     * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-     * @param Join $join The IndicatorValue's Join
-     */
-    protected function aggregateByLatestValue(QueryBuilder $queryBuilder, Join $join)
-    {
-        // Find aliases of main entity and the current Join (IndicatorValues)
-        $originAlias = $queryBuilder->getRootAliases()[0];
-        $mainValuesAlias = $join->getAlias();
-
-        // The GROUP BY clause of the query must include the `id` fields of main
-        // and joined entities to avoid running into the `only_full_group_by`
-        // MySQL restriction. Then, append the aggregation target field (date).
-        $groupByFields = array_map(fn($alias) => "{$alias}.id", $queryBuilder->getAllAliases());
-        array_push($groupByFields, "${mainValuesAlias}.date");
-
-        $queryBuilder
-            ->addSelect('MAX(iv.date) AS maxDate')
-            ->leftJoin("${originAlias}.values", 'iv')
-            ->groupBy(implode(', ', $groupByFields))
-            ->having("${mainValuesAlias}.date = maxDate");
     }
 }

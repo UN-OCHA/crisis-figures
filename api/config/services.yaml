@@ -27,6 +27,6 @@ services:
     # please note that last definitions always *replace* previous ones
 
     # Data Providers
-    App\DataProvider\IndicatorDataProvider:
+    App\DataProvider\Indicator\IndicatorCollectionDataProvider:
         arguments:
             $collectionExtensions: !tagged api_platform.doctrine.orm.query_extension.collection
