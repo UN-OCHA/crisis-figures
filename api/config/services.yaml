@@ -30,3 +30,7 @@ services:
     App\DataProvider\Indicator\IndicatorCollectionDataProvider:
         arguments:
             $collectionExtensions: !tagged api_platform.doctrine.orm.query_extension.collection
+    
+    App\DataProvider\Indicator\IndicatorItemDataProvider:
+        arguments:
+            $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
