@@ -94,8 +94,15 @@ final class IndicatorItemDataProvider implements ItemDataProviderInterface, Rest
         }
 
         $this->applyPresetMutations($queryBuilder, $preset);
+        $result = $queryBuilder->getQuery()->getOneOrNullResult();
+        // Adjust the result set by removing the extra fields used for
+        // aggregation and keeping the hydrated objects only which are added in
+        // index `"0"` of each item in the result set.
+        if (is_array($result) && isset($result[0]) && ($result[0] instanceof Indicator)) {
+            $result = $result[0];
+        }
 
-        return $queryBuilder->getQuery()->getOneOrNullResult();
+        return $result;
     }
 
     /**
