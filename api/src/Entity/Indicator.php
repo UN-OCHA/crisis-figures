@@ -73,7 +73,8 @@ class Indicator
     /**
      * @var array
      * @ApiProperty(
-     *     description="A list of indicator values."
+     *     description="A list of indicator values.",
+     *     fetchEager=true
      * )
      * @Groups({"values"})
      * @ORM\OneToMany(targetEntity="IndicatorValue", mappedBy="indicator")
@@ -83,7 +84,8 @@ class Indicator
     /**
      * @var Country
      * @ApiProperty(
-     *     description="The target country."
+     *     description="The target country.",
+     *     fetchEager=true
      * )
      * @ApiFilter(SearchFilter::class, properties={"country": "exact", "country.code": "exact"})
      * @Groups({"country", "indicators", "indicator:output", "indicator:input"})
