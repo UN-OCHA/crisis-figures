@@ -39,9 +39,6 @@ class Indicator
     use Accessor\Name;
     use Accessor\Terms;
 
-    /** Types of Indicator presets */
-    const PRESET_LATEST = 'latest';
-
     /**
      * @var int The entity Id
      * @ORM\Id

@@ -42,6 +42,9 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
     use Accessor\Date;
     use BehaviorModel\Timestampable\TimestampableTrait;
 
+    /** Types of Indicator/Values presets */
+    const PRESET_LATEST = 'latest';
+
     /**
      * @var int The entity Id
      * @Groups({"indicator_value:output"})
