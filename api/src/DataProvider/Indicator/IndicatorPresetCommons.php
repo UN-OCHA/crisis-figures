@@ -4,8 +4,7 @@ namespace App\DataProvider\Indicator;
 
 use ApiPlatform\Core\Api\OperationType;
 use App\Entity\Indicator;
-use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\ORM\QueryBuilder;
+use App\Entity\IndicatorValue;
 
 /**
  * This trait contains data provider functions that are shared between
@@ -16,9 +15,10 @@ trait IndicatorPresetCommons
     /**
      * Extract the `preset` value from context.
      *
-     * @param string $operationType
-     * @param array $context
-     * @return string|null
+     * @param string $operationType Type of operation
+     * @param array  $context       Context related
+     *
+     * @return string|null Context value or NULL
      */
     public function getPresetFromContext(string $operationType, array $context = []): ?string
     {
@@ -33,65 +33,41 @@ trait IndicatorPresetCommons
         if (OperationType::COLLECTION === $operationType &&
             isset($context['groups']) &&
             false !== array_search('values', $context['groups'])) {
-            $preset = Indicator::PRESET_LATEST;
+            $preset = IndicatorValue::PRESET_LATEST;
         }
 
         return $preset;
     }
 
     /**
-     * Modify the query to aggregate indicator values according to the
-     * provided preset.
+     * Assign IndicatorValue instances to corresponding Indicator instances.
      *
-     * @param QueryBuilder $queryBuilder
-     * @param string|null $preset
+     * The function modifies the `$indicators` argument with `$values` assigned
+     * to their corresponding indicators.
+     *
+     * Both lists are assumed to be sorted to improve the performance of this
+     * function. Note that the number of IndicatorValue(s) in `$values` does not
+     * necessarily need match the number of `$indicators`; though, they are
+     * still assumed to follow the same order of:
+     * ``` indicatorValue.indicatorId => indicator.id ```
+     *
+     * @param IndicatorValue[] $values     IndicatorValue instances
+     * @param Indicator[]      $indicators Indicator instances (in-out parameter)
      */
-    protected function applyPresetMutations(QueryBuilder $queryBuilder, ?string $preset)
+    protected function assignValuesToIndicators(array $values, array &$indicators): void
     {
-        /* @var Join[] $joinsGroup */
-
-        // Currently only a `latest` preset requires mutating the query since
-        // the `history` preset fetches all IndicatorValues, which is the
-        // default behavior.
-        if ($preset !== Indicator::PRESET_LATEST) {
-            return;
-        }
-
-        $joins = $queryBuilder->getDQLPart('join');
-
-        // Find a Join that targets the `values` table
-        foreach ($joins as $joinSetAlias => $joinsGroup) {
-            foreach ($joinsGroup as $jIndex => $join) {
-                if ($join->getJoin() === "{$joinSetAlias}.values") {
-                    $this->aggregateByLatestValue($queryBuilder, $join);
-                    break 2;
+        foreach ($indicators as $indicator) {
+            foreach ($values as $valIndex => $value) {
+                if ($value->getIndicator()->getId() === $indicator->getId()) {
+                    $indicator->setValues([$value]);
+                    unset($values[$valIndex]);
                 }
+                break;
+            }
+
+            if (empty($values)) {
+                break;
             }
         }
-    }
-
-    /**
-     * Perform the actual injection and/or modification of DQL parts in order to
-     * group the results based on the target aggregation field.
-     *
-     * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-     * @param Join $join The IndicatorValue's Join
-     */
-    protected function aggregateByLatestValue(QueryBuilder $queryBuilder, Join $join)
-    {
-        // Find aliases of main entity and the current Join (IndicatorValues)
-        $originAlias = $queryBuilder->getRootAliases()[0];
-        $mainValuesAlias = $join->getAlias();
-        // The GROUP BY clause of the query must include the `id` fields of main
-        // and joined entities to avoid running into the `only_full_group_by`
-        // MySQL restriction. Then, append the aggregation target field (date).
-        $groupByFields = array_map(fn($alias) => "{$alias}.id", $queryBuilder->getAllAliases());
-        array_push($groupByFields, "${mainValuesAlias}.date");
-
-        $queryBuilder
-            ->addSelect('MAX(CONCAT(iv.date, iv.createdAt, iv.id)) AS maxDate')
-            ->leftJoin("${originAlias}.values", 'iv')
-            ->groupBy(implode(', ', $groupByFields))
-            ->having("CONCAT(${mainValuesAlias}.date, ${mainValuesAlias}.createdAt, ${mainValuesAlias}.id) = maxDate");
     }
 }

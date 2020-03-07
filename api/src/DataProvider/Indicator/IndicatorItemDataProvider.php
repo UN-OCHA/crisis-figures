@@ -13,6 +13,8 @@ use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use ApiPlatform\Core\Exception\RuntimeException;
 use App\Entity\Indicator;
+use App\Entity\IndicatorValue;
+use App\Repository\IndicatorValueRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityManagerInterface;
@@ -76,13 +78,17 @@ final class IndicatorItemDataProvider implements ItemDataProviderInterface, Rest
             throw new RuntimeException('The repository class must have a "createQueryBuilder" method.');
         }
 
+        // Create QueryBuilder
         $queryBuilder = $repository->createQueryBuilder('o');
         $queryNameGenerator = new QueryNameGenerator();
         $doctrineClassMetadata = $manager->getClassMetadata($resourceClass);
-        $preset = $this->getPresetFromContext(OperationType::ITEM, $context);
 
+        /** @var $valuesRepo IndicatorValueRepository */
+        $valuesRepo = $manager->getRepository(IndicatorValue::class);
+        $preset = $this->getPresetFromContext(OperationType::ITEM, $context);
         $this->addWhereForIdentifiers($identifiers, $queryBuilder, $doctrineClassMetadata);
 
+        // Execute Doctrine extensions associated with "item" operation type
         foreach ($this->itemExtensions as $extension) {
             $extension->applyToItem($queryBuilder, $queryNameGenerator, $resourceClass, $identifiers, $operationName, $context);
 
@@ -93,8 +99,12 @@ final class IndicatorItemDataProvider implements ItemDataProviderInterface, Rest
             }
         }
 
-        $this->applyPresetMutations($queryBuilder, $preset);
+        // Update the query to either fetch the most recent value per Indicator,
+        // using the `date` field; or fetch all indicator values if the `latest`
+        // preset is not set.
+        $valuesRepo->applyPresetMutations($queryBuilder, $preset);
         $result = $queryBuilder->getQuery()->getOneOrNullResult();
+
         // Adjust the result set by removing the extra fields used for
         // aggregation and keeping the hydrated objects only which are added in
         // index `"0"` of each item in the result set.
@@ -122,9 +132,9 @@ final class IndicatorItemDataProvider implements ItemDataProviderInterface, Rest
                 $placeholder
             );
 
-            $queryBuilder->andWhere($expression);
-
-            $queryBuilder->setParameter($placeholder, $value, $classMetadata->getTypeOfField($identifier));
+            $queryBuilder
+                ->andWhere($expression)
+                ->setParameter($placeholder, $value, $classMetadata->getTypeOfField($identifier));
         }
     }
 }
