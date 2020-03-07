@@ -146,6 +146,15 @@ class Indicator
         return $this;
     }
 
+    public function addValue(IndicatorValue $value): self
+    {
+        if (is_array($this->values)) {
+            $this->values[] = $value;
+        }
+
+        return $this;
+    }
+
     /**
      * @return Country
      */
