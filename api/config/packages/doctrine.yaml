@@ -16,3 +16,7 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+        # MySQL DQL extensions
+        dql:
+            string_functions:
+                field: DoctrineExtensions\Query\Mysql\Field
