@@ -34,7 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         "whitelist"={"indicators"}
  *     }
  * )
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\IndicatorValueRepository")
  */
 class IndicatorValue implements BehaviorEntity\TimestampableInterface
 {
