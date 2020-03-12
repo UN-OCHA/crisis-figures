@@ -90,7 +90,8 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
     /**
      * @var Indicator
      * @ApiProperty(
-     *     description="The related indicator"
+     *     description="The related indicator",
+     *     fetchEager=false
      * )
      * @ApiFilter(SearchFilter::class, properties={"indicator": "exact", "indicator.id": "exact"})
      * @Groups({"indicators", "indicator_value:input"})
