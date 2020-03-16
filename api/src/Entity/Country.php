@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Entity\Traits\Accessor;
 use Doctrine\ORM\Mapping as ORM;
@@ -36,6 +37,7 @@ class Country
      * )
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @ApiFilter(OrderFilter::class, properties={"id"})
      * @Groups({"country", "country:output"})
      * @ORM\Column(type="integer")
      */
@@ -47,6 +49,7 @@ class Country
      *     identifier=true,
      *     description="The officially assigned ISO 3166-1 alpha-3 country code.",
      * )
+     * @ApiFilter(OrderFilter::class, properties={"code"})
      * @Groups({"country", "country:output", "country:input"})
      * @ORM\Column(unique=true)
      * @Assert\NotBlank
@@ -59,6 +62,7 @@ class Country
      *     description="The country name."
      * )
      * @ApiFilter(SearchFilter::class, properties={"name": "start"})
+     * @ApiFilter(OrderFilter::class, properties={"name"})
      * @Groups({"country", "country:output", "country:input"})
      * @ORM\Column
      * @Assert\NotBlank

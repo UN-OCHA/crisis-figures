@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 use App\Entity\Traits\Accessor;
@@ -50,6 +51,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      * @Groups({"indicator_value:output"})
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @ApiFilter(OrderFilter::class, properties={"id"})
      * @Groups({"values", "indicator_value:output"})
      * @ORM\Column(type="integer")
      */
@@ -60,6 +62,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      * @ApiProperty(
      *     description="The date on which the value is recorded."
      * )
+     * @ApiFilter(OrderFilter::class, properties={"date"})
      * @Groups({"values", "indicator_value:output", "indicator_value:input"})
      * @ORM\Column(type="date")
      * @Assert\NotBlank
@@ -72,6 +75,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      * @ApiProperty(
      *     description="A numeric value of an indicator."
      * )
+     * @ApiFilter(OrderFilter::class, properties={"value"})
      * @Groups({"values", "indicator_value:output", "indicator_value:input"})
      * @ORM\Column(type="float")
      */
@@ -82,6 +86,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      * @ApiProperty(
      *     description="The source URL of the value."
      * )
+     * @ApiFilter(OrderFilter::class, properties={"sourceUrl"})
      * @Groups({"values", "indicator_value:output", "indicator_value:input"})
      * @ORM\Column(type="text")
      */

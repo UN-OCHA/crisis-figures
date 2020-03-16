@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 use App\Entity\Traits\Accessor;
@@ -43,6 +44,7 @@ class Indicator
      * @var int The entity Id
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @ApiFilter(OrderFilter::class, properties={"id"})
      * @Groups({"indicators", "indicator:output"})
      * @ORM\Column(type="integer")
      */
@@ -54,6 +56,7 @@ class Indicator
      *     description="The indicator's name."
      * )
      * @ApiFilter(SearchFilter::class, properties={"name": "start"})
+     * @ApiFilter(OrderFilter::class, properties={"name"})
      * @Groups({"indicators", "indicator:output", "indicator:input"})
      * @ORM\Column(type="text")
      * @Assert\NotBlank
@@ -66,7 +69,9 @@ class Indicator
      *     description="The source organization."
      * )
      * @Groups({"indicators", "indicator:output", "indicator:input"})
+     * @ApiFilter(OrderFilter::class, properties={"organization"})
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank
      */
     private $organization;
 
@@ -88,6 +93,7 @@ class Indicator
      *     fetchEager=true
      * )
      * @ApiFilter(SearchFilter::class, properties={"country": "exact", "country.code": "exact"})
+     * @ApiFilter(OrderFilter::class, properties={"country.name"})
      * @Groups({"country", "indicators", "indicator:output", "indicator:input"})
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="indicators")
      * @Assert\NotBlank
