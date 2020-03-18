@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 use App\Entity\Traits\Accessor;
 use Doctrine\ORM\Mapping as ORM;
@@ -47,6 +48,7 @@ class Vocabulary
      * @ApiProperty
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @ApiFilter(OrderFilter::class, properties={"id"})
      * @Groups({"vocabulary", "vocabulary:output"})
      * @ORM\Column(type="integer")
      */
@@ -57,6 +59,7 @@ class Vocabulary
      * @ApiProperty(
      *     description="A short name for the vocabulary to be used for filtering, etc...",
      * )
+     * @ApiFilter(OrderFilter::class, properties={"name"})
      * @Groups({"vocabulary", "vocabulary:output", "vocabulary:input"})
      * @ORM\Column(type="string")
      * @Assert\NotBlank
@@ -68,6 +71,7 @@ class Vocabulary
      * @ApiProperty(
      *     description="A label that describes the vocabulary."
      * )
+     * @ApiFilter(OrderFilter::class, properties={"label"})
      * @Groups({"vocabulary", "vocabulary:output", "vocabulary:input"})
      * @ORM\Column(type="text")
      * @Assert\NotBlank
