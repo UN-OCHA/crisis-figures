@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 use App\Entity\Traits\Accessor;
@@ -46,6 +47,7 @@ class Term
      * @var int The entity Id
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @ApiFilter(OrderFilter::class, properties={"id"})
      * @Groups({"terms", "term:output"})
      * @ORM\Column(type="integer")
      */
@@ -56,6 +58,7 @@ class Term
      * @ApiProperty(
      *     description="A short name for the term to be used for filtering, etc...",
      * )
+     * @ApiFilter(OrderFilter::class, properties={"name"})
      * @Groups({"terms", "term:output", "term:input"})
      * @ORM\Column(type="string")
      * @Assert\NotBlank
@@ -67,6 +70,7 @@ class Term
      * @ApiProperty(
      *     description="A label that describes the term."
      * )
+     * @ApiFilter(OrderFilter::class, properties={"label"})
      * @Groups({"terms", "term:output", "term:input"})
      * @ORM\Column(type="text")
      * @Assert\NotBlank
