@@ -103,7 +103,7 @@ class Term
      *     description="Related terms."
      * )
      * @ApiFilter(SearchFilter::class, properties={"parent.name": "exact"})
-     * @Groups({"parent"})
+     * @Groups({"parent", "term:input"})
      * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity="Term", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
