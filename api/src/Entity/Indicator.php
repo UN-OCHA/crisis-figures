@@ -106,7 +106,7 @@ class Indicator
      *     description="Related terms."
      * )
      * @ApiFilter(SearchFilter::class, properties={"terms.name": "exact"})
-     * @Groups({"terms"})
+     * @Groups({"terms", "indicator:input"})
      * @ORM\ManyToMany(targetEntity="Term", inversedBy="indicators")
      * @ORM\JoinTable(name="indicators_terms")
      */
