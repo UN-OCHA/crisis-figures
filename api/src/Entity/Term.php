@@ -125,10 +125,14 @@ class Term
      * @ApiProperty(
      *     description="Related vocabulary."
      * )
-     * @ApiFilter(SearchFilter::class, properties={"vocabulary.name": "exact"})
-     * @Groups({"vocabulary"})
+     * @ApiFilter(SearchFilter::class, properties={
+     *     "vocabulary.id": "exact", 
+     *     "vocabulary.name": "exact"
+     * })
+     * @Groups({"vocabulary", "term:input"})
      * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity="Vocabulary", inversedBy="terms")
+     * @Assert\NotBlank
      */
     private $vocabulary;
 
