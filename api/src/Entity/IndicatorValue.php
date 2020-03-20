@@ -78,6 +78,7 @@ class IndicatorValue implements BehaviorEntity\TimestampableInterface
      * @ApiFilter(OrderFilter::class, properties={"value"})
      * @Groups({"values", "indicator_value:output", "indicator_value:input"})
      * @ORM\Column(type="float")
+     * @Assert\Type(type="float")
      */
     private $value;
 
