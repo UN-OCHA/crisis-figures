@@ -47,8 +47,8 @@ class Indicator
      * @var int The entity Id
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ApiFilter(OrderFilter::class, properties={"id"})
      * @Groups({"indicators", "indicator:output"})
+     * @ApiFilter(OrderFilter::class, properties={"id"})
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -71,13 +71,23 @@ class Indicator
      * @ApiProperty(
      *     description="The source organization."
      * )
-     * @Groups({"indicators", "indicator:output", "indicator:input"})
      * @ApiFilter(OrderFilter::class, properties={"organization"})
+     * @Groups({"indicators", "indicator:output", "indicator:input"})
      * @ORM\Column(type="string", nullable=true)
      * @Assert\NotBlank
      */
     private $organization;
 
+    /**
+     * @var int An arbitrary value assigned by editors to determine an indicator's
+     *          priority. Weight works as follows: the higher the value the more
+     *          an item "sinks" to the bottom of lists.
+     * @ApiFilter(OrderFilter::class, properties={"weight"})
+     * @Groups({"indicators", "indicator:output", "indicator:input"})
+     * @ORM\Column(type="integer")
+     */
+    private $weight;
+    
     /**
      * @var array
      * @ApiProperty(
@@ -120,6 +130,7 @@ class Indicator
      */
     public function __construct()
     {
+        $this->weight = 0;
         $this->values = [];
         $this->terms = [];
     }
@@ -135,6 +146,21 @@ class Indicator
     public function setOrganization(string $organization): self
     {
         $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWeight(): ?int
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(int $weight): self
+    {
+        $this->weight = $weight;
 
         return $this;
     }
