@@ -16,6 +16,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * The Country entity.
  *
  * @ApiResource(
+ *     attributes={
+ *         "pagination_client_items_per_page"=true
+ *     },
  *     normalizationContext={
  *         "groups"={"country:output"}
  *     },

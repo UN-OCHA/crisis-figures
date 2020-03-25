@@ -17,6 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * The Indicator entity.
  *
  * @ApiResource(
+ *     attributes={
+ *         "pagination_client_items_per_page"=true
+ *     },
  *     normalizationContext={
  *         "groups"={"indicator:output"}
  *     },
