@@ -74,6 +74,7 @@ class Term
      *     description="A label that describes the term."
      * )
      * @ApiFilter(OrderFilter::class, properties={"label"})
+     * @ApiFilter(SearchFilter::class, properties={"label": "partial"})
      * @Groups({"terms", "term:output", "term:input"})
      * @ORM\Column(type="text")
      * @Assert\NotBlank
