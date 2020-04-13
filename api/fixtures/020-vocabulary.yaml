@@ -1,8 +1,7 @@
 App\Entity\Vocabulary:
-
     vocabulary_base_indicator:
+        label: Base Indicator
         name: base_indicator
-        label: 'Base Indicator'
     vocabulary_theme:
+        label: Theme
         name: theme
-        label: 'Theme'

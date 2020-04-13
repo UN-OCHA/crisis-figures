@@ -1,265 +1,225 @@
 App\Entity\Term:
-
-    term_education:
-        name: education
-        label: 'Education'
-        vocabulary: '@vocabulary_theme'
-    term_food:
-        name: food
-        label: 'Food'
-        vocabulary: '@vocabulary_theme'
-    term_health:
-        name: health
-        label: 'Health'
-        vocabulary: '@vocabulary_theme'
-    term_nutrition:
-        name: nutrition
-        label: 'Nutrition'
-        vocabulary: '@vocabulary_theme'
-    term_protection_and_human_rights:
-        name: protection_and_human_rights
-        label: 'Protection and Human Rights'
-        vocabulary: '@vocabulary_theme'
-    term_safety_and_security:
-        name: safety_and_security
-        label: 'Safety and Security'
-        vocabulary: '@vocabulary_theme'
-    term_no_theme:
-        name: no_theme
-        label: 'No theme'
-        vocabulary: '@vocabulary_theme'
-    
-    term_no_base_indicator:
-        name: no_base_indicator
-        label: 'No Base Indicator'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_no_theme'
     term_acutely_malnourished_children:
+        label: Acutely malnourished children
         name: acutely_malnourished_children
-        label: 'Acutely Malnourished Children'
+        parent: '@term_theme_nutrition'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_nutrition'
-    term_children_in_need:
-        name: children_in_need
-        label: 'Children in Need'
+    term_acutely_malnourished_pregnant_women:
+        label: Pregnant or Lactating Acutely Malnourished Women
+        name: pregnant_or_lactating_acutely_malnourished_women
+        parent: '@term_theme_nutrition'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_protection_and_human_rights'
-    term_cholera_cases:
-        name: cholera_cases
-        label: 'Cholera Cases'
+    term_aid_workers_arrested:
+        label: Aid workers - Arrested
+        name: aid_workers_arrested
+        parent: '@term_theme_safety_and_security'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_civilians_attacks:
-        name: civilians_attacks
-        label: 'Civilians - Attacks'
+    term_aid_workers_kidnapped:
+        label: Aid workers - Kidnapped
+        name: aid_workers_kidnapped
+        parent: '@term_theme_safety_and_security'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_protection_and_human_rights'
-    term_civilians_incidents:
-        name: civilians_incidents
-        label: 'Civilians - Incidents'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_protection_and_human_rights'
-    term_civilians_killed:
-        name: civilians_killed
-        label: 'Civilians - Killed'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_protection_and_human_rights'
-    term_ebola_cases:
-        name: ebola_cases
-        label: 'Ebola Cases'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_ebola_deaths:
-        name: ebola_deaths
-        label: 'Ebola Deaths'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_food_insecure_people:
-        name: food_insecure_people
-        label: 'Food Insecure People'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_food'
-    term_health_facilities_attacks:
-        name: health_facilities_attacks
-        label: 'Health Facilities - Attacks'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_health_facilities_closed:
-        name: health_facilities_closed
-        label: 'Health Facilities - Closed'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_humanitarian_access_incidents:
-        name: humanitarian_access_incidents
-        label: 'Humanitarian Access Incidents'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_safety_and_security'
-    term_idps:
-        name: idps
-        label: 'IDPs'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_protection_and_human_rights'
-    term_lassa_fever_cases:
-        name: lassa_fever_cases
-        label: 'Lassa Fever cases'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_lassa_fever_deaths:
-        name: lassa_fever_deaths
-        label: 'Lassa Fever Deaths'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_malaria_cases:
-        name: malaria_cases
-        label: 'Malaria Cases'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_malaria_deaths:
-        name: malaria_deaths
-        label: 'Malaria Deaths'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_measles_cases:
-        name: measles_cases
-        label: 'Measles Cases'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_measles_deaths:
-        name: measles_deaths
-        label: 'Measles Deaths'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_people_in_need:
-        name: people_in_need
-        label: 'People in Need'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_protection_and_human_rights'
-    term_people_targeted_for_assistance:
-        name: people_targeted_for_assistance
-        label: 'People Targeted for Assistance'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_protection_and_human_rights'
-    term_refugees:
-        name: refugees
-        label: 'Refugees'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_protection_and_human_rights'
-    term_returnees:
-        name: returnees
-        label: 'Returnees'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_protection_and_human_rights'
-    term_schools_closed:
-        name: schools_closed
-        label: 'Schools Closed'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_education'
-    term_schools_damaged:
-        name: schools_damaged
-        label: 'Schools Damaged'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_education'
-    term_security_incidentes:
-        name: security_incidentes
-        label: 'Security Incidentes'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_safety_and_security'
-    term_severe_acutely_malnourished_children:
-        name: severe_acutely_malnourished_children
-        label: 'Severe Acutely Malnourished Children'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_nutrition'
-    term_students_affected_by_closure_of_schools:
-        name: students_affected_by_closure_of_schools
-        label: 'Students affected by Closure of Schools'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_education'
-    term_yellow_fever_cases:
-        name: yellow_fever_cases
-        label: 'Yellow Fever Cases'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_yellow_fever_deaths:
-        name: yellow_fever_deaths
-        label: 'Yellow Fever Deaths'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_blank:
-        name: blank
-        label: '(blank)'
+    term_aid_workers_killed:
+        label: Aid workers - Killed
+        name: aid_workers_killed
+        parent: '@term_theme_safety_and_security'
         vocabulary: '@vocabulary_base_indicator'
     term_aid_workers_kka_incidents:
+        label: Aid workers - KKA incidents
         name: aid_workers_kka_incidents
-        label: 'Aid Workers - KKA Incidents'
+        parent: '@term_theme_safety_and_security'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_safety_and_security'
-    term_aid_workers_arrested:
-        name: aid_workers_arrested
-        label: 'Aid Workers - Arrested'
+    term_children_in_need:
+        label: Children in need
+        name: children_in_need
+        parent: '@term_theme_protection_and_human_rights'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_safety_and_security'
-    term_aid_workers_kidnapped:
-        name: aid_workers_kidnapped
-        label: 'Aid Workers - Kidnapped'
+    term_cholera_cases:
+        label: Cholera cases
+        name: cholera_cases
+        parent: '@term_theme_health'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_safety_and_security'
-    term_aid_workers_killed:
-        name: aid_workers_killed
-        label: 'Aid Workers - Killed'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_safety_and_security'
     term_cholera_deaths:
+        label: Cholera deaths
         name: cholera_deaths
-        label: 'Cholera Deaths'
+        parent: '@term_theme_health'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_civilians_injured:
-        name: civilians_injured
-        label: 'Civilians - Injured'
+    term_civilians_attacks:
+        label: Civilians - Attacks
+        name: civilians_attacks
+        parent: '@term_theme_safety_and_security'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_protection_and_human_rights'
-    term_civilians_killed_and_injured:
-        name: civilians_killed_and_injured
-        label: 'Civilians - Killed and Injured'
-        vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_protection_and_human_rights'
     term_civilians_deaths:
+        label: Civilians - Deaths
         name: civilians_deaths
-        label: 'Civilians - Deaths'
+        parent: '@term_theme_safety_and_security'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_protection_and_human_rights'
-    term_civilians_injuries:
-        name: civilians_injuries
-        label: 'Civilians - Injuries'
+    term_civilians_incidents:
+        label: Civilians - Incidents
+        name: civilians_incidents
+        parent: '@term_theme_safety_and_security'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_protection_and_human_rights'
-    term_people_assisted_wfp:
-        name: people_assisted_wfp
-        label: 'People Assisted - WFP'
+    term_civilians_injured:
+        label: Civilians - Injured
+        name: civilians_injured
+        parent: '@term_theme_safety_and_security'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_food'
+    term_civilians_killed:
+        label: Civilians - Killed
+        name: civilians_killed
+        parent: '@term_theme_safety_and_security'
+        vocabulary: '@vocabulary_base_indicator'
+    term_ebola_cases:
+        label: Ebola cases
+        name: ebola_cases
+        parent: '@term_theme_health'
+        vocabulary: '@vocabulary_base_indicator'
+    term_ebola_deaths:
+        label: Ebola deaths
+        name: ebola_deaths
+        parent: '@term_theme_health'
+        vocabulary: '@vocabulary_base_indicator'
+    term_food_insecure_people:
+        label: Food insecure people
+        name: food_insecure_people
+        parent: '@term_theme_food'
+        vocabulary: '@vocabulary_base_indicator'
+    term_health_facilities_attacks:
+        label: Health facilities - Attacks
+        name: health_facilities_attacks
+        parent: '@term_theme_safety_and_security'
+        vocabulary: '@vocabulary_base_indicator'
+    term_health_facilities_closed:
+        label: Health facilities - Closed
+        name: health_facilities_closed
+        parent: '@term_theme_health'
+        vocabulary: '@vocabulary_base_indicator'
     term_health_facilities_injuries:
+        label: Health facilities - Injuries
         name: health_facilities_injuries
-        label: 'Health Facilities - Injuries'
+        parent: '@term_theme_safety_and_security'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_health_facilities_killed:
+    term_health_facilities_kill:
+        label: Health facilities - Killed
         name: health_facilities_killed
-        label: 'Health Facilities - Killed'
+        parent: '@term_theme_safety_and_security'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
-    term_no_base_indicator_education:
-        name: no_base_indicator_education
-        label: 'Education - No Base Indicator'
+    term_humanitarian_access_incidents:
+        label: Humanitarian acess incidents
+        name: humanitarian_acess_incidents
+        parent: '@term_theme_safety_and_security'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_education'
-    term_no_base_indicator_food:
-        name: no_base_indicator_food
-        label: 'Food - No Base Indicator'
+    term_idps:
+        label: IDPs
+        name: idps
+        parent: '@term_theme_protection_and_human_rights'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_food'
-    term_no_base_indicator_health:
-        name: no_base_indicator_health
-        label: 'Health - No Base Indicator'
+    term_lassa_fever_cases:
+        label: Lassa fever cases
+        name: lassa_fever_cases
+        parent: '@term_theme_health'
         vocabulary: '@vocabulary_base_indicator'
-        parent: '@term_health'
+    term_lassa_fever_deaths:
+        label: Lassa fever deaths
+        name: lassa_fever_deaths
+        parent: '@term_theme_health'
+        vocabulary: '@vocabulary_base_indicator'
+    term_malaria_cases:
+        label: Malaria cases
+        name: malaria_cases
+        parent: '@term_theme_health'
+        vocabulary: '@vocabulary_base_indicator'
+    term_malaria_deaths:
+        label: Malaria deaths
+        name: malaria_deaths
+        parent: '@term_theme_health'
+        vocabulary: '@vocabulary_base_indicator'
+    term_measles_cases:
+        label: Measles cases
+        name: measles_cases
+        parent: '@term_theme_health'
+        vocabulary: '@vocabulary_base_indicator'
+    term_measles_deaths:
+        label: Measles deaths
+        name: measles_deaths
+        parent: '@term_theme_health'
+        vocabulary: '@vocabulary_base_indicator'
+    term_people_assisted_wfp:
+        label: People assisted - WFP
+        name: people_assisted_wfp
+        parent: '@term_theme_food'
+        vocabulary: '@vocabulary_base_indicator'
+    term_people_in_need:
+        label: People in need
+        name: people_in_need
+        parent: '@term_theme_protection_and_human_rights'
+        vocabulary: '@vocabulary_base_indicator'
+    term_people_targeted_for_assistance:
+        label: People targeted for assistance
+        name: people_targeted_for_assistance
+        parent: '@term_theme_protection_and_human_rights'
+        vocabulary: '@vocabulary_base_indicator'
+    term_refugees:
+        label: Refugess
+        name: refugess
+        parent: '@term_theme_protection_and_human_rights'
+        vocabulary: '@vocabulary_base_indicator'
+    term_returnees:
+        label: Returness
+        name: returness
+        parent: '@term_theme_protection_and_human_rights'
+        vocabulary: '@vocabulary_base_indicator'
+    term_schools_closed:
+        label: Schools - Closed
+        name: schools_closed
+        parent: '@term_theme_education'
+        vocabulary: '@vocabulary_base_indicator'
+    term_schools_damaged:
+        label: Schools - Damaged
+        name: schools_damaged
+        parent: '@term_theme_education'
+        vocabulary: '@vocabulary_base_indicator'
+    term_security_incidents:
+        label: Security incidents
+        name: security_incidents
+        parent: '@term_theme_safety_and_security'
+        vocabulary: '@vocabulary_base_indicator'
+    term_students_affected_by_closure_of_schools:
+        label: Students affected
+        name: students_affected
+        parent: '@term_theme_education'
+        vocabulary: '@vocabulary_base_indicator'
+    term_theme_education:
+        label: Education
+        name: education
+        vocabulary: '@vocabulary_theme'
+    term_theme_food:
+        label: Food
+        name: food
+        vocabulary: '@vocabulary_theme'
+    term_theme_health:
+        label: Health
+        name: health
+        vocabulary: '@vocabulary_theme'
+    term_theme_nutrition:
+        label: Nutrition
+        name: nutrition
+        vocabulary: '@vocabulary_theme'
+    term_theme_protection_and_human_rights:
+        label: Protection and Human Rights
+        name: protection_and_human_rights
+        vocabulary: '@vocabulary_theme'
+    term_theme_safety_and_security:
+        label: Safety and Security
+        name: safety_and_security
+        vocabulary: '@vocabulary_theme'
+    term_yellow_fever_cases:
+        label: Yellow fever cases
+        name: yellow_fever_cases
+        parent: '@term_theme_health'
+        vocabulary: '@vocabulary_base_indicator'
+    term_yellow_fever_deaths:
+        label: Yellow fever deaths
+        name: yellow_fever_deaths
+        parent: '@term_theme_health'
+        vocabulary: '@vocabulary_base_indicator'
